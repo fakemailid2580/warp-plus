@@ -8,7 +8,7 @@
     "env": {
         "ENV": {
             "description": "Don't Touch It",
-            "generator": "Anything"
+            "value": "Anything"
             
         }
 
