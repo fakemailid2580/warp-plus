@@ -9,7 +9,8 @@
         "ENV": {
             "description": "Don't Touch It",
             "required": true
-            "value": "Anything"
+            "generator": "Anything"
+            
         }
 
     },
