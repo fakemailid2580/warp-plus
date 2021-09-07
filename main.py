@@ -1,93 +1,84 @@
-import os
-import json
-import time
-import string
-import random
-import datetime
-import traceback
-import urllib.error
 import urllib.request
-from urllib.parse import parse_qs, urlparse
+import json
+import datetime
+import random
+import string
+import time
+import os
+import sys
+os.system("title WARP-PLUS-CLOUDFLARE By ALIILAPRO")
+os.system('cls' if os.name == 'nt' else 'clear')
 
-config = {"TOTAL": 0}
-referrerID = os.environ.get("REFERRER_ID")
-
-
-class RedirectHandler(urllib.request.HTTPRedirectHandler):
-    def redirect_request(self, *a, **kw):
-        return
-
-
-class WarpyAPI:
-    def __init__(self) -> None:
-        self.referrerID = referrerID or self.get_refferID()
-
-    @staticmethod
-    def __gen_random_string(n):
-        return "".join(
-            random.choice(string.ascii_letters + string.digits)
-            for _ in range(n)
-        )
-
-    @property
-    def api_url(self):
-        return "https://api.cloudflareclient.com/v0a{}/reg".format(
-            random.randint(100, 999)
-        )
-
-    def get_refferID(self) -> str:
-        opener = urllib.request.build_opener(RedirectHandler)
-        urllib.request.install_opener(opener)
-        try:
-            resp = urllib.request.urlopen(
-                os.environ.get("REFERRER_URL", "https://warp.plus/FRs9d")
-            )
-        except urllib.error.HTTPError as e:
-            resp = e
-        url = resp.headers.get("location")
-        return parse_qs(urlparse(url).query)["referrer"][0]
-
-    def get_data(self):
-        install_id = self.__gen_random_string(11)
-
-        body = json.dumps(
-            {
-                "key": "{}=".format(self.__gen_random_string(43)),
-                "install_id": install_id,
-                "fcm_token": "{}:{}".format(
-                    install_id, self.__gen_random_string(140)
-                ),
-                "referrer": self.referrerID,
-                "warp_enabled": False,
-                "tos": datetime.datetime.now().astimezone().isoformat(),
-                "type": "Android",
-            }
-        ).encode("UTF-8")
-
-        headers = {
-            "Host": "api.cloudflareclient.com",
-            "User-Agent": "okhttp/3.12.1",
-            "Content-Type": "application/json",
-        }
-
-        try:
-            req = urllib.request.Request(
-                self.api_url, headers=headers, data=body
-            )
-            response = urllib.request.urlopen(req)
-            con = response.read().decode("UTF-8")
-            if response.getcode() == 200 and self.referrerID in con:
-                config["TOTAL"] += 1
-                print("Total: {}GB... Earned 1GB.".format(config["TOTAL"]))
-
-        except Exception:
-            traceback.print_exc()
-
-    def start(self):
-        while True:
-            self.get_data()
-            time.sleep(int(os.environ.get("WAIT_TIME", 20)))
+print ("--> Warp Plus Script")
+print ("--> Version: 69.0.0")
 
 
-if __name__ == "__main__":
-    WarpyAPI().start()
+print ("--------")
+print ("THIS SCRIPT CODDED BY Notorious-Turtle") 
+print ("--------")
+
+referrer = "da462292-838b-484d-a525-c953e25ddf7b"
+def genString(stringLength):
+	try:
+		letters = string.ascii_letters + string.digits
+		return ''.join(random.choice(letters) for i in range(stringLength))
+	except Exception as error:
+		print(error)		    
+def digitString(stringLength):
+	try:
+		digit = string.digits
+		return ''.join((random.choice(digit) for i in range(stringLength)))    
+	except Exception as error:
+		print(error)	
+url = f'https://api.cloudflareclient.com/v0a{digitString(3)}/reg'
+def run():
+	try:
+		install_id = genString(22)
+		body = {"key": "{}=".format(genString(43)),
+				"install_id": install_id,
+				"fcm_token": "{}:APA91b{}".format(install_id, genString(134)),
+				"referrer": referrer,
+				"warp_enabled": False,
+				"tos": datetime.datetime.now().isoformat()[:-3] + "+02:00",
+				"type": "Android",
+				"locale": "es_ES"}
+		data = json.dumps(body).encode('utf8')
+		headers = {'Content-Type': 'application/json; charset=UTF-8',
+					'Host': 'api.cloudflareclient.com',
+					'Connection': 'Keep-Alive',
+					'Accept-Encoding': 'gzip',
+					'User-Agent': 'okhttp/3.12.1'
+					}
+		req         = urllib.request.Request(url, data, headers)
+		response    = urllib.request.urlopen(req)
+		status_code = response.getcode()	
+		return status_code
+	except Exception as error:
+		print(error)	
+
+g = 0
+b = 0
+while True:
+	result = run()
+	if result == 200:
+		g = g + 1
+		os.system('cls' if os.name == 'nt' else 'clear')
+		print("")
+		animation = ["o","oX", "ooX", "oooX", "ooooX", "oooooX", "ooooooX", "oooooooX", "ooooooooX", "oooooooooo"] 
+		for i in range(len(animation)):
+			time.sleep(0.5)
+			sys.stdout.write("\r[+] Preparing... " + animation[i % len(animation)])
+			sys.stdout.flush()
+		print(f"\n[X] WORKING ON PROVIDED ID")    
+		print(f"[:)] {g} GB added !")
+		print(f"==> Total: {g} Good {b} Bad")
+		print("Time Sleep : 18 Seconds ...")
+		time.sleep(18)
+	else:
+		b = b + 1
+		os.system('cls' if os.name == 'nt' else 'clear')
+		print("")
+		
+		print("")
+		print("[:(] Error when connecting to server.")
+		print(f"[#] Total: {g} Good {b} Bad")	
