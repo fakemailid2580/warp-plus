@@ -5,6 +5,13 @@
     "repository": "https://github.com/manansantoki/warp-plus",
     "success_url": "/",
     "stack": "heroku-20",
+    "env": {
+        "ENV": {
+            "description": "Don't Touch It",
+            "required": true
+            "value": "Anything"
+        }
+
     },
     "buildpacks": [
         {
