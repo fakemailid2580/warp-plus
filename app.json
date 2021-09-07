@@ -1,0 +1,14 @@
+{
+    "name": "Warp Plus",
+    "description": "Warp Plus Unlimited",
+    "keywords": ["warp", "cloudflare", "1.1.1.1"],
+    "repository": "https://github.com/manansantoki/warp-plus",
+    "success_url": "/",
+    "stack": "heroku-20",
+    },
+    "buildpacks": [
+        {
+            "url": "heroku/python"
+        }
+    ]
+}
